@@ -19,7 +19,7 @@ SetNewPasswordForm::~SetNewPasswordForm()
 
 void SetNewPasswordForm::on_BackButton_clicked()
 {
-    emit HideSetNewPassForm();
+    emit RequestHide();
 }
 
 
@@ -48,7 +48,7 @@ void SetNewPasswordForm::on_SetNewPassButton_clicked()
     {
         ui->PassRecoveryNewPassInputBox->clear();
         ui->PassRecoveryCurrentPassInputBox->clear();
-        emit HideSetNewPassForm();
+        emit RequestHide();
     }
 
 }

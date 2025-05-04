@@ -18,7 +18,7 @@ public:
     ~SetNewPasswordForm();
 
 signals:
-    void HideSetNewPassForm();
+    void RequestHide();
 
 private slots:
     void on_BackButton_clicked();

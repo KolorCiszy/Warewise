@@ -128,6 +128,20 @@ bool GDatabaseHelpers::AddArticleToDatabase(const FArticle* inArticle)
     else
     {
         QMessageBox::information(nullptr, "Success", "Successfuly added new article to database");
+        return true;
+    }
+    return true;
+}
+
+bool GDatabaseHelpers::RemoveArticleFromDatabase(int64_t ArticleID)
+{
+    QSqlQuery deleteQuery(DB_Connection);
+    deleteQuery.prepare("DELETE FROM Articles WHERE ID = ?");
+    deleteQuery.addBindValue(ArticleID);
+
+    if (!deleteQuery.exec()) {
+        qDebug() << "Error deleting article: " << deleteQuery.lastError().text();
+        QMessageBox::warning(nullptr, "Error", "Failed to delete this article."); // Inform the user
         return false;
     }
     return true;
@@ -151,6 +165,38 @@ bool GDatabaseHelpers::ArticleIdExists(int64_t articleId) const
     }
     // Check if any rows were returned
     return query.next(); // Returns true if a row was found, false otherwise
+}
+
+bool GDatabaseHelpers::GetAllArticles(QList<std::shared_ptr<FArticle>> &OutArticles) const
+{
+    // 2.  Execute a query to fetch the articles from the database.
+    QSqlQuery query(DB_Connection);
+    query.prepare("SELECT ID, Name, PriceMainPart, PriceFractionalPart, PriceCurrencyCode, Count, Comments, MassAmount, MassUnit, Category FROM Articles"); // Select all fields
+
+    if (!query.exec()) {
+        QMessageBox::warning(nullptr, "Error fetching article data","Fething articles data failed.");
+        return false;
+    }
+
+    // 3. Iterate through the query results and populate the QStringList.
+    while (query.next())
+    {
+        std::shared_ptr<FArticle> article = std::make_shared<FArticle>();
+        article->setId(query.value("ID").toInt());
+        article->setName(query.value("Name").toString());
+        FPrice price = FPrice{query.value("PriceMainPart").toInt(), query.value("PriceFractionalPart").toInt(), query.value("PriceCurrencyCode").toString()};
+        article->setPrice(price);
+
+        article->setCount(query.value("Count").toInt());
+        article->setComments(query.value("Comments").toString());
+
+        FMass mass = FMass{query.value("MassAmount").toDouble(),static_cast<EMassUnit>(query.value("MassUnit").toInt())};
+
+        article->setMass(mass);
+        article->setCategory(query.value("Category").toString());
+        OutArticles.append(article);
+    }
+    return !OutArticles.isEmpty();
 }
 
 GDatabaseHelpers::GDatabaseHelpers()

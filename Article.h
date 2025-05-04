@@ -38,6 +38,11 @@ struct FPrice
     int32_t MainPart = 0;
     int32_t FractionalPart = 0;
     QString ISO4217Code = "000";
+
+    QString GetAsString()
+    {
+        return QString("%1.%2 %3").arg(MainPart).arg(FractionalPart).arg(ISO4217Code);
+    }
 };
 static bool IsValidPrice(const FPrice& price)
 {
@@ -53,6 +58,10 @@ struct FMass
     double Amount = 0;
     EMassUnit MassUnit = EMassUnit::kg; // wastes 7 bytes :(
 
+    QString GetAsString()
+    {
+        return QString("%1 %2").arg(Amount).arg(MassUnitsToText[MassUnit]);
+    }
 };
 static bool IsValidMass(FMass inMass)
 {
@@ -74,6 +83,15 @@ public:
         Comments{comments},
         Mass{mass},
         Category{category}{};
+
+    QString GetAsString()
+    {
+        return QString("ID: %1, Name: %2, Price: %3, Count: %4, Category: %5, Mass: %6, Comments: %7")
+            .arg(ID)
+            .arg(Name, Price.GetAsString())
+            .arg(Count)
+            .arg(Category, Mass.GetAsString(), Comments);
+    }
 
     // Getters and setters
     int64_t getId() const

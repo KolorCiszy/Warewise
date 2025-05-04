@@ -18,13 +18,16 @@ public:
     ~AddNewArticleForm();
 
 signals:
-    void HideAddNewArticleForm();
+    void RequestHide();
 private slots:
     void on_BackButton_clicked();
 
     void on_AddNewArticleButton_clicked();
 
 private:
+
+    void ClearUserInput();
+
     std::shared_ptr<FArticle> ValidateArticleDataInput();
 
     Ui::AddNewArticleFrom *ui;

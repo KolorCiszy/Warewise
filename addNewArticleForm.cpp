@@ -22,6 +22,9 @@ AddNewArticleForm::AddNewArticleForm(QWidget *parent)
     QValidator* IntValidator = new QIntValidator(0,std::numeric_limits<int>::max());
     ui->ArticlePriceMainPartInputBox->setValidator(IntValidator);
     ui->ArticlePriceFractionalPartInputBox->setValidator(IntValidator);
+    ui->ArticleIDInputBox->setValidator(IntValidator);
+    ui->ArticleCountInputBox->setValidator(IntValidator);
+
 
     QValidator* DoubleValidator = new QDoubleValidator(0, 999999.0, 5);
     ui->ArticleMassInputBox->setValidator(DoubleValidator);
@@ -34,7 +37,7 @@ AddNewArticleForm::~AddNewArticleForm()
 
 void AddNewArticleForm::on_BackButton_clicked()
 {
-    emit HideAddNewArticleForm();
+    emit RequestHide();
 }
 
 
@@ -46,18 +49,27 @@ void AddNewArticleForm::on_AddNewArticleButton_clicked()
     {
         if(GDatabaseHelpers::GetInstance()->AddArticleToDatabase(Article.get()))
         {
-            QMessageBox::information(this, "Article added successfuly", "Article has been added successfuly.");
-        }
-        else
-        {
-            QMessageBox::warning(this, "Operation failed", "Article couldn't be added.");
+            ClearUserInput();
         }
     }
     else
     {
+        QMessageBox::warning(this, "Operation failed", "Article couldn't be added.");
         qDebug() << "Article object is null";
     }
 
+}
+
+void AddNewArticleForm::ClearUserInput()
+{
+    ui->ArticleCategoryInputBox->clear();
+    ui->ArticleCountInputBox->clear();
+    ui->ArticleCommentsInputBox->clear();
+    ui->ArticleIDInputBox->clear();
+    ui->ArticleMassInputBox->clear();
+    ui->ArticlePriceMainPartInputBox->clear();
+    ui->ArticlePriceFractionalPartInputBox->clear();
+    ui->ArticleNameInputBox->clear();
 }
 
 std::shared_ptr<FArticle> AddNewArticleForm::ValidateArticleDataInput()

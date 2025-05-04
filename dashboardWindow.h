@@ -14,6 +14,7 @@ QT_END_NAMESPACE
 class AddNewArticleForm;
 class User;
 class SetNewPasswordForm;
+class ArticleDisplayList;
 
 class DashboardWindow : public QMainWindow
 {
@@ -33,10 +34,16 @@ private slots:
 
     void on_AddNewArticleButton_clicked();
 
+    void on_ShowArticlesButton_clicked();
+
+    void on_ShowAccountDetailsButton_clicked();
+
 private:
     Ui::DashboardWindow *ui = nullptr;
     SetNewPasswordForm* m_SetNewPassForm = nullptr;
     AddNewArticleForm* m_AddNewArticleForm = nullptr;
+    ArticleDisplayList* m_ArticleDisplayList = nullptr;
+
 
     void ShowMainPage();
 

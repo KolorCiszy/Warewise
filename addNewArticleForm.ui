@@ -328,6 +328,20 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>ArticleNameInputBox</tabstop>
+  <tabstop>ArticleIDInputBox</tabstop>
+  <tabstop>ArticleCountInputBox</tabstop>
+  <tabstop>ArticleMassInputBox</tabstop>
+  <tabstop>ArticleMassUnitComboBox</tabstop>
+  <tabstop>ArticlePriceMainPartInputBox</tabstop>
+  <tabstop>ArticlePriceFractionalPartInputBox</tabstop>
+  <tabstop>ArticlePriceIsoCodeInputBox</tabstop>
+  <tabstop>ArticleCategoryInputBox</tabstop>
+  <tabstop>ArticleCommentsInputBox</tabstop>
+  <tabstop>AddNewArticleButton</tabstop>
+  <tabstop>BackButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

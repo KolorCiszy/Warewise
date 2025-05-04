@@ -33,8 +33,11 @@ public:
 
     bool AddArticleToDatabase(const FArticle* inArticle);
 
+    bool RemoveArticleFromDatabase(int64_t ArticleID);
+
     bool ArticleIdExists(int64_t articleId) const;
 
+    bool GetAllArticles(QList<std::shared_ptr<FArticle>>& OutArticles) const;
 
 private:
     void InitializeDB();

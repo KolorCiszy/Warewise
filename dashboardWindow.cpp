@@ -1,5 +1,6 @@
 #include "dashboardWindow.h"
 #include "./ui_dashboardWindow.h"
+#include "ArticleDisplayList.h"
 #include "addNewArticleForm.h"
 #include "gProjectVersion.h"
 #include "user.h"
@@ -20,24 +21,42 @@ DashboardWindow::DashboardWindow(QWidget *parent)
     pageLayout_1->setAlignment(m_SetNewPassForm, Qt::AlignCenter);
     pageLayout_1->setSizeConstraint(QLayout::SetMinimumSize);
 
-     m_AddNewArticleForm = new AddNewArticleForm(this);
+    m_AddNewArticleForm = new AddNewArticleForm(this);
     QVBoxLayout *pageLayout_2 = new QVBoxLayout(ui->AddArticlePage);
-     pageLayout_2->addWidget(m_AddNewArticleForm);
-     pageLayout_2->setAlignment(m_AddNewArticleForm, Qt::AlignCenter);
-     pageLayout_2->setSizeConstraint(QLayout::SetMinimumSize);
+    pageLayout_2->addWidget(m_AddNewArticleForm);
+    pageLayout_2->setAlignment(m_AddNewArticleForm, Qt::AlignCenter);
+    pageLayout_2->setSizeConstraint(QLayout::SetMinimumSize);
 
-    QObject::connect(m_SetNewPassForm, &SetNewPasswordForm::HideSetNewPassForm, [this]()
+
+    m_ArticleDisplayList = new ArticleDisplayList(this);
+    QVBoxLayout *pageLayout_3 = new QVBoxLayout(ui->ArticleListDisplayPage);
+    pageLayout_3->addWidget(m_ArticleDisplayList);
+    pageLayout_3->setAlignment(m_ArticleDisplayList, Qt::AlignCenter);
+    pageLayout_3->setSizeConstraint(QLayout::SetMinimumSize);
+
+
+    QObject::connect(m_SetNewPassForm, &SetNewPasswordForm::RequestHide, [this]()
                      {
                         ShowMainPage();
                      });
 
-    QObject::connect(m_AddNewArticleForm, &AddNewArticleForm::HideAddNewArticleForm, [this]()
+    QObject::connect(m_AddNewArticleForm, &AddNewArticleForm::RequestHide, [this]()
                      {
                           ShowMainPage();
                      });
+    QObject::connect(m_ArticleDisplayList, &ArticleDisplayList::RequestHide, [this]()
+                     {
+                         ShowMainPage();
+                     });
+
     // end
+
+    // Update ui
     ui->MainWidgetSwitcher->setCurrentWidget(ui->MainPage);
 
+    ui->AddNewDeliveryButton->setEnabled(false);
+    ui->ShowDeliveriesButton->setEnabled(false);
+    ui->ShowShipmentsButton->setEnabled(false);
 
 
 
@@ -73,5 +92,18 @@ void DashboardWindow::ShowMainPage()
 void DashboardWindow::on_AddNewArticleButton_clicked()
 {
     ui->MainWidgetSwitcher->setCurrentWidget(ui->AddArticlePage);
+}
+
+
+void DashboardWindow::on_ShowArticlesButton_clicked()
+{
+    ui->MainWidgetSwitcher->setCurrentWidget(ui->ArticleListDisplayPage);
+    m_ArticleDisplayList->Refresh();
+}
+
+
+void DashboardWindow::on_ShowAccountDetailsButton_clicked()
+{
+
 }
 

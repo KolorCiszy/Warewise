@@ -46,10 +46,11 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="SetNewPassPage"/>
     <widget class="QWidget" name="AddArticlePage"/>
+    <widget class="QWidget" name="ArticleListDisplayPage"/>
     <widget class="QWidget" name="MainPage">
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
@@ -132,19 +133,6 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QPushButton" name="DeleteArticleButton">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Usuń wpis towaru</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
@@ -176,7 +164,8 @@
             </font>
            </property>
            <property name="text">
-            <string>Dostawy i wysyłki</string>
+            <string>Dostawy i wysyłki 
+(moduł WIP)</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -199,6 +188,21 @@
            </property>
            <property name="text">
             <string>Dodaj dostawę</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+           <property name="checked">
+            <bool>false</bool>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -365,7 +369,6 @@
   <tabstop>AddNewArticleButton</tabstop>
   <tabstop>ShowArticlesButton</tabstop>
   <tabstop>ModifyArticleButton</tabstop>
-  <tabstop>DeleteArticleButton</tabstop>
   <tabstop>AddNewDeliveryButton</tabstop>
   <tabstop>ShowDeliveriesButton</tabstop>
   <tabstop>ShowShipmentsButton</tabstop>
