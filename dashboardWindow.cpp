@@ -4,6 +4,7 @@
 #include "addNewArticleForm.h"
 #include "gProjectVersion.h"
 #include "user.h"
+#include "AccountDetails.h"
 #include "setNewPasswordForm.h"
 
 DashboardWindow::DashboardWindow(QWidget *parent)
@@ -13,40 +14,50 @@ DashboardWindow::DashboardWindow(QWidget *parent)
     this->ui->setupUi(this);
 
     // Setup New pass form widget
-    m_SetNewPassForm = new SetNewPasswordForm(this);
+    m_SetNewPassForm = std::make_unique<SetNewPasswordForm>(this);
 
     QVBoxLayout *pageLayout_1 = new QVBoxLayout(ui->SetNewPassPage);
 
-    pageLayout_1->addWidget(m_SetNewPassForm);
-    pageLayout_1->setAlignment(m_SetNewPassForm, Qt::AlignCenter);
+    pageLayout_1->addWidget(m_SetNewPassForm.get());
+    pageLayout_1->setAlignment(m_SetNewPassForm.get(), Qt::AlignCenter);
     pageLayout_1->setSizeConstraint(QLayout::SetMinimumSize);
 
-    m_AddNewArticleForm = new AddNewArticleForm(this);
+    m_AddNewArticleForm = std::make_unique<AddNewArticleForm>(this);
     QVBoxLayout *pageLayout_2 = new QVBoxLayout(ui->AddArticlePage);
-    pageLayout_2->addWidget(m_AddNewArticleForm);
-    pageLayout_2->setAlignment(m_AddNewArticleForm, Qt::AlignCenter);
+    pageLayout_2->addWidget(m_AddNewArticleForm.get());
+    pageLayout_2->setAlignment(m_AddNewArticleForm.get(), Qt::AlignCenter);
     pageLayout_2->setSizeConstraint(QLayout::SetMinimumSize);
 
 
-    m_ArticleDisplayList = new ArticleDisplayList(this);
+    m_ArticleDisplayList = std::make_unique<ArticleDisplayList>(this);
     QVBoxLayout *pageLayout_3 = new QVBoxLayout(ui->ArticleListDisplayPage);
-    pageLayout_3->addWidget(m_ArticleDisplayList);
-    pageLayout_3->setAlignment(m_ArticleDisplayList, Qt::AlignCenter);
+    pageLayout_3->addWidget(m_ArticleDisplayList.get());
+    pageLayout_3->setAlignment(m_ArticleDisplayList.get(), Qt::AlignCenter);
     pageLayout_3->setSizeConstraint(QLayout::SetMinimumSize);
 
 
-    QObject::connect(m_SetNewPassForm, &SetNewPasswordForm::RequestHide, [this]()
+    m_AccountDetails = std::make_unique<AccountDetails>(this);
+    QVBoxLayout *pageLayout_4 = new QVBoxLayout(ui->AccountDetailsPage);
+    pageLayout_4->addWidget(m_AccountDetails.get());
+    pageLayout_4->setAlignment(m_AccountDetails.get(), Qt::AlignCenter);
+    pageLayout_4->setSizeConstraint(QLayout::SetMinimumSize);
+
+    QObject::connect(m_SetNewPassForm.get(), &SetNewPasswordForm::RequestHide, [this]()
                      {
                         ShowMainPage();
                      });
 
-    QObject::connect(m_AddNewArticleForm, &AddNewArticleForm::RequestHide, [this]()
+    QObject::connect(m_AddNewArticleForm.get(), &AddNewArticleForm::RequestHide, [this]()
                      {
-                          ShowMainPage();
+                        ShowMainPage();
                      });
-    QObject::connect(m_ArticleDisplayList, &ArticleDisplayList::RequestHide, [this]()
+    QObject::connect(m_ArticleDisplayList.get(), &ArticleDisplayList::RequestHide, [this]()
                      {
-                         ShowMainPage();
+                        ShowMainPage();
+                     });
+    QObject::connect(m_AccountDetails.get(), &AccountDetails::RequestHide, [this]()
+                     {
+                        ShowMainPage();
                      });
 
     // end
@@ -104,6 +115,6 @@ void DashboardWindow::on_ShowArticlesButton_clicked()
 
 void DashboardWindow::on_ShowAccountDetailsButton_clicked()
 {
-
+    ui->MainWidgetSwitcher->setCurrentWidget(ui->AccountDetailsPage);
 }
 

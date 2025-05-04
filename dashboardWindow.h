@@ -15,6 +15,7 @@ class AddNewArticleForm;
 class User;
 class SetNewPasswordForm;
 class ArticleDisplayList;
+class AccountDetails;
 
 class DashboardWindow : public QMainWindow
 {
@@ -40,10 +41,10 @@ private slots:
 
 private:
     Ui::DashboardWindow *ui = nullptr;
-    SetNewPasswordForm* m_SetNewPassForm = nullptr;
-    AddNewArticleForm* m_AddNewArticleForm = nullptr;
-    ArticleDisplayList* m_ArticleDisplayList = nullptr;
-
+    std::unique_ptr<SetNewPasswordForm> m_SetNewPassForm;
+    std::unique_ptr<AddNewArticleForm> m_AddNewArticleForm;
+    std::unique_ptr<ArticleDisplayList> m_ArticleDisplayList;
+    std::unique_ptr<AccountDetails> m_AccountDetails;
 
     void ShowMainPage();
 

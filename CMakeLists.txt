@@ -47,6 +47,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Article.h
         gProjectVersion.h
         ArticleDisplayList.h ArticleDisplayList.cpp ArticleDisplayList.ui
+        AccountDetails.h AccountDetails.cpp AccountDetails.ui
 
 
 

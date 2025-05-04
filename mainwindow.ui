@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="MainPage">
      <widget class="QWidget" name="verticalLayoutWidget">
@@ -286,6 +286,9 @@
       </property>
       <property name="text">
        <string>Zaloguj</string>
+      </property>
+      <property name="autoDefault">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -896,6 +899,28 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>LoginInputBox</tabstop>
+  <tabstop>PasswordInputBox</tabstop>
+  <tabstop>LoginToAppButton</tabstop>
+  <tabstop>BackButton</tabstop>
+  <tabstop>LoginButton</tabstop>
+  <tabstop>Register</tabstop>
+  <tabstop>RecoverPassButton</tabstop>
+  <tabstop>ExitButton</tabstop>
+  <tabstop>RegisterLoginInputBox</tabstop>
+  <tabstop>RegisterEmailInputBox</tabstop>
+  <tabstop>RegisterNameInputBox</tabstop>
+  <tabstop>RegisterLastnameInputBox</tabstop>
+  <tabstop>RegisterPasswordInputBox</tabstop>
+  <tabstop>RegisterUserButton</tabstop>
+  <tabstop>BackButton_2</tabstop>
+  <tabstop>PassRecoveryLoginInputBox</tabstop>
+  <tabstop>PassRecoveryEmailInputBox</tabstop>
+  <tabstop>PassRecoveryNewPassInputBox</tabstop>
+  <tabstop>RecoverPassFromDB_Button</tabstop>
+  <tabstop>BackButton_3</tabstop>
+ </tabstops>
  <resources>
   <include location="AppResources.qrc"/>
  </resources>

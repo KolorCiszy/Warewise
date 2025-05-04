@@ -3,5 +3,6 @@
         <file>resources/WareWiseIcon.ico</file>
         <file>resources/WareWiseLogo.png</file>
         <file>resources/WareWiseIcon.rc</file>
+        <file>resources/AccountProfileDefault.png</file>
     </qresource>
 </RCC>

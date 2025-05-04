@@ -46,7 +46,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="SetNewPassPage"/>
     <widget class="QWidget" name="AddArticlePage"/>
@@ -351,6 +351,7 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="AccountDetailsPage"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
