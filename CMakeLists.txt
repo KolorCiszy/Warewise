@@ -38,8 +38,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         ${UI_FILES}
-        AppResources.qrc
         resources/WareWiseIcon.rc
+        AppResources.qrc
         setNewPasswordForm.ui
         setNewPasswordForm.h setNewPasswordForm.cpp setNewPasswordForm.ui
         gdatabasehelpers.h gdatabasehelpers.cpp
