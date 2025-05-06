@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>resources/WareWiseIcon.ico</file>
-        <file>resources/WareWiseLogo.png</file>
-        <file>resources/WareWiseIcon.rc</file>
-    </qresource>
-</RCC>
